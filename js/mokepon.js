@@ -1,3 +1,41 @@
+/* Funcion iniciarJuego */
+const sectionSeleccionarAtaque = document.getElementById ('seleccionar-ataque')
+const sectionReiniciar = document.getElementById('reiniciar')
+const botonMascotaJugador = document.getElementById('boton-mascota')
+const botonFuego = document.getElementById('boton-fuego')
+const botonAgua = document.getElementById('boton-agua')
+const botonTierra = document.getElementById('boton-tierra')
+const botonReiniciar = document.getElementById('boton-reiniciar')
+
+/* Funcion seleccionar mascota jugador */
+const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
+const spawnMascotaJugador = document.getElementById('mascota-jugador')
+
+/* Funcion seleccionar mascota enemigo*/
+const spawnMascotaEnemigo = document.getElementById('mascota-enemigo')
+
+/* Funcion combate */
+const spawVidasJugador = document.getElementById('vidas-jugador')
+const spawVidasEnemigo = document.getElementById('vidas-enemigo')
+
+/* Funcion crearMensaje */
+const sectionMensajes = document.getElementById('resultado')
+const ataquesDelJugador = document.getElementById('ataques-del-jugador')
+const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
+
+class Mokepon {
+    constructor(nombre ,foto ,vida){
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+    }
+}
+
+let pomelo = new Mokepon ('Pomelo','./assets/mokepons_mokepon_hipodoge_attack.png',5)
+
+let achuras = new Mokepon ('Achuras','./assets/mokepons_mokepon_capipepo_attack.png,',5)
+
+let ratatoile = new Mokepon ('Ratatoile','./assets/mokepons_mokepon_ratigueya_attack.png',5)
 
 let ataqueJugador
 let ataqueEnemigo
