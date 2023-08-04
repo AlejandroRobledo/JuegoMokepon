@@ -1,5 +1,5 @@
 /* Funcion iniciarJuego */
-const sectionSeleccionarAtaque = document.getElementById ('seleccionar-ataque')
+const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
 const sectionReiniciar = document.getElementById('reiniciar')
 const botonMascotaJugador = document.getElementById('boton-mascota')
 const botonFuego = document.getElementById('boton-fuego')
@@ -24,23 +24,54 @@ const ataquesDelJugador = document.getElementById('ataques-del-jugador')
 const ataquesDelEnemigo = document.getElementById('ataques-del-enemigo')
 
 class Mokepon {
-    constructor(nombre ,foto ,vida){
+    constructor(nombre, foto, vida) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
+        this.ataques = []
     }
 }
 
-let pomelo = new Mokepon ('Pomelo','./assets/mokepons_mokepon_hipodoge_attack.png',5)
+let pomelo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5)
 
-let achuras = new Mokepon ('Achuras','./assets/mokepons_mokepon_capipepo_attack.png,',5)
+let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png,', 5)
 
-let ratatoile = new Mokepon ('Ratatoile','./assets/mokepons_mokepon_ratigueya_attack.png',5)
+let ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5)
 
+//Empujo informacion al arreglo "ataques"
+pomelo.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' }
+)
+
+achuras.ataques.push(
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+)
+
+ratatoile.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+)
+
+let mokepones = []
 let ataqueJugador
 let ataqueEnemigo
 let vidasJugador = 3
 let vidasEnemigo = 3
+
+//En el metodo "push" lo que este adentro, lo va a "empujar" al arreglo y lo va a guardar
+/* mokepones.push(pomelo,achuras,ratatoile) */
+
 
 function iniciarJuego() {
 
@@ -61,7 +92,7 @@ function iniciarJuego() {
     botonTierra.addEventListener('click', ataqueTierra)
 
     let botonReiniciar = document.getElementById('boton-reiniciar')
-    botonReiniciar.addEventListener('click',reiniciarJuego)
+    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 function seleccionarMascotaJugador() {
@@ -71,7 +102,7 @@ function seleccionarMascotaJugador() {
 
     let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
     sectionSeleccionarAtaque.style.display = 'flex'
-    
+
     let spawnMascotaJugador = document.getElementById('mascota-jugador')
 
     if (document.getElementById('Pomelo').checked) {
@@ -167,7 +198,7 @@ function combate() {
     revisarVidas()
 }
 
-function revisarVidas() { 
+function revisarVidas() {
     if (vidasEnemigo == 0) {
         crearMensajeFinal('FELICITACIONES! Ganaste ✨🎉!')
     } else if (vidasJugador == 0) {
@@ -188,7 +219,7 @@ function crearMensaje(resultado) {
     nuevoAtaqueDelJugador.innerHTML = ataqueJugador
     nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
 
-    
+
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
 }
@@ -197,7 +228,7 @@ function crearMensaje(resultado) {
 
 
 function crearMensajeFinal(resultadoFinal) {
-    
+
     let sectionMensajes = document.getElementById('resultado')
     let parrafo = document.createElement('p')
 
@@ -214,7 +245,7 @@ function crearMensajeFinal(resultadoFinal) {
     sectionReiniciar.style.display = 'block'
 }
 
-function reiniciarJuego(){
+function reiniciarJuego() {
     location.reload()
 }
 
