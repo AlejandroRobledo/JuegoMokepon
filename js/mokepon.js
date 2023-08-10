@@ -43,7 +43,7 @@ class Mokepon {
 
 let pomelo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5)
 
-let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png,', 5)
+let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png|', 5)
 
 let ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5)
 
