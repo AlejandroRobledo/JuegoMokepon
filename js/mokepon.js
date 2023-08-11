@@ -43,7 +43,7 @@ class Mokepon {
 
 let pomelo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5)
 
-let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png|', 5)
+let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5)
 
 let ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5)
 
@@ -77,6 +77,9 @@ ratatoile.ataques.push(
 let mokepones = []
 let ataqueJugador
 let ataqueEnemigo
+let inputPomelo 
+let inputAchuras
+let inputRatatoile
 let opcionDeMokepones
 let vidasJugador = 3
 let vidasEnemigo = 3
@@ -98,9 +101,15 @@ function iniciarJuego() {
             <img src=${mokepon.foto} alt=${mokepon.nombre}>
         </label>    
         `
-     contenedorTarjetas.innerHTML += opcionDeMokepones
+    contenedorTarjetas.innerHTML += opcionDeMokepones
+
+     inputPomelo = document.getElementById('Pomelo')
+     inputAchuras = document.getElementById('Achuras')
+     inputRatatoile = document.getElementById('Ratatoile')
+
     })
 
+    
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
    
