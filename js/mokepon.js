@@ -135,14 +135,16 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarAtaque.style.display = 'flex'
 
 
-    if (document.getElementById('Pomelo').checked) {
-        spawnMascotaJugador.innerHTML = 'Pomelo'
+    if (inputPomelo.checked) {
+       /*  Borro informacion escrita a mano para utilizar la informacion proveniente
+        de nuetros objetos */
+        spawnMascotaJugador.innerHTML = inputPomelo.id
 
-    } else if (document.getElementById('Achuras').checked) {
-        spawnMascotaJugador.innerHTML = 'Achuras'
+    } else if (inputAchuras.checked) {
+        spawnMascotaJugador.innerHTML = inputAchuras.id
 
-    } else if (document.getElementById('Ratatoile').checked) {
-        spawnMascotaJugador.innerHTML = 'Ratatoile'
+    } else if (inputRatatoile.checked) {
+        spawnMascotaJugador.innerHTML = inputRatatoile.id
 
     } else {
         alert('SELECCIONA UNA MASCOTA:')
