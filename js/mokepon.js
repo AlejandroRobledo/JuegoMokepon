@@ -80,6 +80,7 @@ let ataqueEnemigo
 let inputPomelo 
 let inputAchuras
 let inputRatatoile
+let mascotaJugador
 let opcionDeMokepones
 let vidasJugador = 3
 let vidasEnemigo = 3
@@ -139,12 +140,15 @@ function seleccionarMascotaJugador() {
        /*  Borro informacion escrita a mano para utilizar la informacion proveniente
         de nuetros objetos */
         spawnMascotaJugador.innerHTML = inputPomelo.id
+        mascotaJugador = inputPomelo.id
 
     } else if (inputAchuras.checked) {
         spawnMascotaJugador.innerHTML = inputAchuras.id
+        mascotaJugador = inputAchuras.id
 
     } else if (inputRatatoile.checked) {
         spawnMascotaJugador.innerHTML = inputRatatoile.id
+        mascotaJugador = inputRatatoile.id
 
     } else {
         alert('SELECCIONA UNA MASCOTA:')
@@ -152,22 +156,31 @@ function seleccionarMascotaJugador() {
 
     /*  alert("SELECCIONASTE A: " + mascota) */
 
+    extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
 
 
 }
 
-function seleccionarMascotaEnemigo() {
-    let mascotaAleatoria = aleatorio(1, 3)
 
-    if (mascotaAleatoria == 1) {
-        spawnMascotaEnemigo.innerHTML = 'Pomelo'
-    } else if (mascotaAleatoria == 2) {
-        spawnMascotaEnemigo.innerHTML = 'Achuras'
-    } else if (mascotaAleatoria == 3) {
-        spawnMascotaEnemigo.innerHTML = 'Ratatoile'
-    }
+function extraerAtaques(mascotaJugador){
+let ataques
+for (let i = 0; i < mokepones.length; i++) {
+    if (mascotaJugador == mokepones[i].nombre){}
+    ataques = mokepones[i].ataques
 }
+
+mostraAtaques(ataques)
+
+}
+
+
+function seleccionarMascotaEnemigo() {
+    /* Modifico esta funcion para poder trabajar directamente con los objetos */
+    let mascotaAleatoria = aleatorio(0, mokepones.length -1)
+
+    spawnMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre 
+    }
 
 
 function ataqueFuego() {
