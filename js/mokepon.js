@@ -30,12 +30,20 @@ const contenedorAtaques = document.getElementById('contenedorAtaques')
 /* let sectionReiniciar = document.getElementById('reiniciar') */
 
 
+
 class Mokepon {
     constructor(nombre, foto, vida) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
+        
     }
 }
 
@@ -72,6 +80,7 @@ ratatoile.ataques.push(
 
 const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
+
 
 let mokepones = []
 let ataqueJugador = []
@@ -146,16 +155,7 @@ function seleccionarMascotaJugador() {
 
     /* sectionSeleccionarAtaque.style.display = 'flex' */
     sectionVerMapa.style.display = 'flex'
-    let imagenDePomelo = new Image()
-    imagenDePomelo.src = pomelo.foto
-    lienzo.drawImage(
-        imagenDePomelo,
-        20,
-        40,
-        100,
-        100
-    )
-
+   
 
     if (inputPomelo.checked) {
         /*  Borro informacion escrita a mano para utilizar la informacion proveniente
@@ -358,5 +358,22 @@ function reiniciarJuego() {
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
+
+function pintarPersonaje(){
+    lienzo.clearRect(0 , 0, mapa.clientWidth, mapa.clientHeight)
+    lienzo.drawImage(
+        pomelo.mapaFoto,
+        pomelo.x,
+        pomelo.y,
+        pomelo.ancho,
+        pomelo.alto
+    )
+}
+
+function moverPomelo(){
+    pomelo.x = pomelo.x+5
+    pintarPersonaje()
+}
+
 
 window.addEventListener('load', iniciarJuego)
