@@ -70,7 +70,8 @@ ratatoile.ataques.push(
     { nombre: '🌱', id: 'boton-fuego' },
 )
 
-
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
 
 let mokepones = []
 let ataqueJugador = []
@@ -92,6 +93,7 @@ let victoriasJugador = 0
 let victoriasEnemigo = 0
 let vidasJugador = 3
 let vidasEnemigo = 3
+let lienzo = mapa.getContext("2d")
 
 //En el metodo "push" lo que este adentro, lo va a "empujar" al arreglo y lo va a guardar
 /* mokepones.push(pomelo,achuras,ratatoile) */
@@ -102,6 +104,10 @@ mokepones.push(pomelo, achuras, ratatoile)
 function iniciarJuego() {
     /* En una variable "opcionDeMokepones" encapsulo etiqueta HTML, luego reemplazo los nombres anteriores
     por las propiedades de dicho objeto*/
+
+    sectionSeleccionarAtaque.style.display = 'none'
+    sectionVerMapa.style.display = 'none'
+
     mokepones.forEach((mokepon) => {
         opcionDeMokepones = `
         <input type="radio" name="mascota" id=${mokepon.nombre} />
@@ -122,7 +128,7 @@ function iniciarJuego() {
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
 
-    sectionSeleccionarAtaque.style.display = 'none'
+    
 
     sectionReiniciar.style.display = 'none'
 
@@ -136,8 +142,19 @@ function seleccionarMascotaJugador() {
 
 
     sectionSeleccionarMascota.style.display = 'none'
+    /* Creo mi primer canvas con imagen de la mascota incluida */
 
-    sectionSeleccionarAtaque.style.display = 'flex'
+    /* sectionSeleccionarAtaque.style.display = 'flex' */
+    sectionVerMapa.style.display = 'flex'
+    let imagenDePomelo = new Image()
+    imagenDePomelo.src = pomelo.foto
+    lienzo.drawImage(
+        imagenDePomelo,
+        20,
+        40,
+        100,
+        100
+    )
 
 
     if (inputPomelo.checked) {
