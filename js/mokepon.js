@@ -43,6 +43,8 @@ class Mokepon {
         this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
+        this.velocidadX = 0
+        this.velocidadY = 0
         
     }
 }
@@ -155,7 +157,7 @@ function seleccionarMascotaJugador() {
 
     /* sectionSeleccionarAtaque.style.display = 'flex' */
     sectionVerMapa.style.display = 'flex'
-   
+   intervalo = setInterval(pintarPersonaje, 50)
 
     if (inputPomelo.checked) {
         /*  Borro informacion escrita a mano para utilizar la informacion proveniente
@@ -360,6 +362,8 @@ function aleatorio(min, max) {
 }
 
 function pintarPersonaje(){
+    pomelo.x = pomelo.x + pomelo.velocidadX
+    pomelo.y = pomelo.y + pomelo.velocidadY
     lienzo.clearRect(0 , 0, mapa.clientWidth, mapa.clientHeight)
     lienzo.drawImage(
         pomelo.mapaFoto,
@@ -370,9 +374,32 @@ function pintarPersonaje(){
     )
 }
 
-function moverPomelo(){
-    pomelo.x = pomelo.x+5
+
+/* Creo las funciones para que la mascota
+se mueva en distintas direcciones */
+function moverDerecha(){
+    pomelo.velocidadX = 5
     pintarPersonaje()
+}
+
+function moverIzquierda(){
+    pomelo.velocidadX = -5
+    pintarPersonaje()
+}
+
+function moverAbajo(){
+    pomelo.velocidadY = 5
+    pintarPersonaje()
+}
+
+function moverArriba(){
+    pomelo.velocidadY = - 5
+    pintarPersonaje()
+}
+
+function detenerMovimiento(){
+    pomelo.velocidadX = 0
+    pomelo.velocidadY = 0
 }
 
 
