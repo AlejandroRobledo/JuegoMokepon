@@ -139,11 +139,7 @@ function iniciarJuego() {
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 
 
-    
-
     sectionReiniciar.style.display = 'none'
-
-
 
 
     botonReiniciar.addEventListener('click', reiniciarJuego)
@@ -158,6 +154,10 @@ function seleccionarMascotaJugador() {
     /* sectionSeleccionarAtaque.style.display = 'flex' */
     sectionVerMapa.style.display = 'flex'
    intervalo = setInterval(pintarPersonaje, 50)
+
+
+   window.addEventListener('keydown', TeclaPresionada)
+   window.addEventListener('keyup', detenerMovimiento)
 
     if (inputPomelo.checked) {
         /*  Borro informacion escrita a mano para utilizar la informacion proveniente
@@ -402,5 +402,23 @@ function detenerMovimiento(){
     pomelo.velocidadY = 0
 }
 
+
+function TeclaPresionada(event){
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba()
+            break
+        case 'ArrowDown':
+            moverAbajo()
+            break
+        case 'ArrowLeft':
+              moverIzquierda()
+            break
+        case 'ArrowRight':
+            moverDerecha()
+        default:
+            break
+    }
+}
 
 window.addEventListener('load', iniciarJuego)
