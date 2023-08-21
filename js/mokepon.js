@@ -91,6 +91,7 @@ let inputPomelo
 let inputAchuras
 let inputRatatoile
 let mascotaJugador
+let mascotaJugadorObjeto
 let ataquesMokepon
 let ataquesMokeponEnemigo
 let opcionDeMokepones
@@ -105,6 +106,8 @@ let victoriasEnemigo = 0
 let vidasJugador = 3
 let vidasEnemigo = 3
 let lienzo = mapa.getContext("2d")
+let mapaBackgraund = new Image()
+mapaBackgraund.src ='./assets/mokemap.webp'
 
 //En el metodo "push" lo que este adentro, lo va a "empujar" al arreglo y lo va a guardar
 /* mokepones.push(pomelo,achuras,ratatoile) */
@@ -152,12 +155,7 @@ function seleccionarMascotaJugador() {
     /* Creo mi primer canvas con imagen de la mascota incluida */
 
     /* sectionSeleccionarAtaque.style.display = 'flex' */
-    sectionVerMapa.style.display = 'flex'
-   intervalo = setInterval(pintarPersonaje, 50)
-
-
-   window.addEventListener('keydown', TeclaPresionada)
-   window.addEventListener('keyup', detenerMovimiento)
+    
 
     if (inputPomelo.checked) {
         /*  Borro informacion escrita a mano para utilizar la informacion proveniente
@@ -180,6 +178,8 @@ function seleccionarMascotaJugador() {
     /*  alert("SELECCIONASTE A: " + mascota) */
 
     extraerAtaques(mascotaJugador)
+    sectionVerMapa.style.display = 'flex'
+    iniciarMapa()
     seleccionarMascotaEnemigo()
 }
 
@@ -361,16 +361,24 @@ function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function pintarPersonaje(){
-    pomelo.x = pomelo.x + pomelo.velocidadX
-    pomelo.y = pomelo.y + pomelo.velocidadY
+
+function pintarCanvas(){
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
     lienzo.clearRect(0 , 0, mapa.clientWidth, mapa.clientHeight)
     lienzo.drawImage(
-        pomelo.mapaFoto,
-        pomelo.x,
-        pomelo.y,
-        pomelo.ancho,
-        pomelo.alto
+        mapaBackgraund,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+    lienzo.drawImage(
+        mascotaJugadorObjeto.mapaFoto,
+        mascotaJugadorObjeto.x,
+        mascotaJugadorObjeto.y,
+        mascotaJugadorObjeto.ancho,
+        mascotaJugadorObjeto.alto
     )
 }
 
@@ -378,28 +386,25 @@ function pintarPersonaje(){
 /* Creo las funciones para que la mascota
 se mueva en distintas direcciones */
 function moverDerecha(){
-    pomelo.velocidadX = 5
-    pintarPersonaje()
+    mascotaJugadorObjeto.velocidadX = 5
+   
 }
 
 function moverIzquierda(){
-    pomelo.velocidadX = -5
-    pintarPersonaje()
+    mascotaJugadorObjeto.velocidadX = -5
 }
 
 function moverAbajo(){
-    pomelo.velocidadY = 5
-    pintarPersonaje()
+    mascotaJugadorObjeto.velocidadY = 5
 }
 
 function moverArriba(){
-    pomelo.velocidadY = - 5
-    pintarPersonaje()
+    mascotaJugadorObjeto.velocidadY = - 5
 }
 
 function detenerMovimiento(){
-    pomelo.velocidadX = 0
-    pomelo.velocidadY = 0
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0
 }
 
 
@@ -420,5 +425,25 @@ function TeclaPresionada(event){
             break
     }
 }
+
+function iniciarMapa(){
+    mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
+    mapa.width = 320
+    mapa.height = 240
+    intervalo = setInterval(pintarCanvas, 50)
+
+    window.addEventListener('keydown', TeclaPresionada)
+    window.addEventListener('keyup', detenerMovimiento)
+}
+
+function obtenerObjetoMascota() {
+    
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador === mokepones[i].nombre) {
+            return mokepones[i]
+        }
+    }
+}
+
 
 window.addEventListener('load', iniciarJuego)
