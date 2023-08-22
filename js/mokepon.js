@@ -32,29 +32,45 @@ const contenedorAtaques = document.getElementById('contenedorAtaques')
 
 
 class Mokepon {
-    constructor(nombre, foto, vida) {
+    constructor(nombre, foto, vida,fotoMapa, x = 10, y = 10) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = 20
-        this.y = 30
-        this.ancho = 80
-        this.alto = 80
+        this.x = x
+        this.y = y
+        this.ancho = 40
+        this.alto = 40
         this.mapaFoto = new Image()
-        this.mapaFoto.src = foto
+        this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
         this.velocidadY = 0
         
     }
+
+    pintarMokepon(){
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+        )
+    }
 }
 
-let pomelo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5)
+let pomelo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5 , './assets/hipodoge.webp')
 
-let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5)
+let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5 , './assets/capipepo.webp')
 
-let ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5)
+let ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5 , './assets/ratigueya.webp')
 
+
+let pomeloEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5 , './assets/hipodoge.webp')
+
+let achurasEnemigo = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5 , './assets/capipepo.webp')
+
+let ratatoileEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5 , './assets/ratigueya.webp')
 //Empujo informacion al arreglo "ataques"
 pomelo.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
@@ -373,13 +389,10 @@ function pintarCanvas(){
         mapa.width,
         mapa.height
     )
-    lienzo.drawImage(
-        mascotaJugadorObjeto.mapaFoto,
-        mascotaJugadorObjeto.x,
-        mascotaJugadorObjeto.y,
-        mascotaJugadorObjeto.ancho,
-        mascotaJugadorObjeto.alto
-    )
+        mascotaJugadorObjeto.pintarMokepon()
+        pomeloEnemigo.pintarMokepon()
+        achurasEnemigo.pintarMokepon()
+        ratatoileEnemigo.pintarMokepon()
 }
 
 
