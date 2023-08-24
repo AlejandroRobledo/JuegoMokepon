@@ -66,11 +66,12 @@ let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.
 let ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5 , './assets/ratigueya.webp')
 
 
-let pomeloEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5 , './assets/hipodoge.webp')
+let pomeloEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5 , './assets/hipodoge.webp', 80, 120)
 
-let achurasEnemigo = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5 , './assets/capipepo.webp')
+let achurasEnemigo = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5 , './assets/capipepo.webp', 150, 95)
 
-let ratatoileEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5 , './assets/ratigueya.webp')
+let ratatoileEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5 , './assets/ratigueya.webp', 200, 190)
+
 //Empujo informacion al arreglo "ataques"
 pomelo.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
@@ -379,8 +380,10 @@ function aleatorio(min, max) {
 
 
 function pintarCanvas(){
-    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
-    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x +
+     mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y +
+     mascotaJugadorObjeto.velocidadY
     lienzo.clearRect(0 , 0, mapa.clientWidth, mapa.clientHeight)
     lienzo.drawImage(
         mapaBackgraund,
@@ -393,6 +396,13 @@ function pintarCanvas(){
         pomeloEnemigo.pintarMokepon()
         achurasEnemigo.pintarMokepon()
         ratatoileEnemigo.pintarMokepon()
+        if (mascotaJugadorObjeto.velocidadX != 0 ||
+             mascotaJugadorObjeto.velocidadY != 0) {
+
+            revisarColision(pomeloEnemigo)
+            revisarColision(achurasEnemigo)
+            revisarColision(ratatoileEnemigo)
+        }
 }
 
 
@@ -458,5 +468,32 @@ function obtenerObjetoMascota() {
     }
 }
 
+function revisarColision(enemigo){
+    const arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+    const izquierdaEnemigo = enemigo.x
+
+    const arribaMascota =
+          mascotaJugadorObjeto.y
+    const abajoMascota =
+          mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto
+    const derechaMascota =
+          mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho
+    const izquierdaMascota =
+          mascotaJugadorObjeto.x
+
+
+
+
+    if (abajoMascota < arribaEnemigo || arribaMascota > abajoEnemigo
+        || derechaMascota < izquierdaEnemigo || izquierdaMascota > derechaEnemigo)  
+        
+        {
+       return     
+    } 
+    detenerMovimiento()
+    alert('Hay colision' + enemigo.nombre)
+}
 
 window.addEventListener('load', iniciarJuego)
