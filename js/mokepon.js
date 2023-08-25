@@ -81,6 +81,14 @@ pomelo.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' }
 )
 
+pomeloEnemigo.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' }
+)
+
 achuras.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
     { nombre: '🌱', id: 'boton-tierra' },
@@ -89,7 +97,23 @@ achuras.ataques.push(
     { nombre: '🔥', id: 'boton-fuego' },
 )
 
+achurasEnemigo.ataques.push(
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+)
+
 ratatoile.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-fuego' },
+)
+
+ratatoileEnemigo.ataques.push(
     { nombre: '🔥', id: 'boton-fuego' },
     { nombre: '🔥', id: 'boton-fuego' },
     { nombre: '🔥', id: 'boton-fuego' },
@@ -171,9 +195,6 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = 'none'
     /* Creo mi primer canvas con imagen de la mascota incluida */
 
-    /* sectionSeleccionarAtaque.style.display = 'flex' */
-    
-
     if (inputPomelo.checked) {
         /*  Borro informacion escrita a mano para utilizar la informacion proveniente
          de nuetros objetos */
@@ -197,7 +218,7 @@ function seleccionarMascotaJugador() {
     extraerAtaques(mascotaJugador)
     sectionVerMapa.style.display = 'flex'
     iniciarMapa()
-    seleccionarMascotaEnemigo()
+   
 }
 
 
@@ -257,17 +278,16 @@ function secuenciaAtaque() {
 
 }
 
-function seleccionarMascotaEnemigo() {
+function seleccionarMascotaEnemigo(enemigo) {
     /* Modifico esta funcion para poder trabajar directamente con los objetos */
-    let mascotaAleatoria = aleatorio(0, mokepones.length - 1)
-    ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques
-
-    spawnMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
+    spawnMascotaEnemigo.innerHTML = enemigo.nombre
+    ataquesMokeponEnemigo = enemigo.ataques
     secuenciaAtaque()
 }
 
 
 function ataqueAleatorioEnemigo() {
+    console.log('ataques enemigo', ataquesMokeponEnemigo)
     let ataqueAleatorio = aleatorio(0, ataquesMokeponEnemigo.length - 1)
 
     if (ataqueAleatorio == 0 || ataqueAleatorio == 1) {
@@ -485,7 +505,6 @@ function revisarColision(enemigo){
 
 
 
-
     if (abajoMascota < arribaEnemigo || arribaMascota > abajoEnemigo
         || derechaMascota < izquierdaEnemigo || izquierdaMascota > derechaEnemigo)  
         
@@ -493,7 +512,12 @@ function revisarColision(enemigo){
        return     
     } 
     detenerMovimiento()
-    alert('Hay colision' + enemigo.nombre)
+    clearInterval(intervalo)
+    console.log('Se detecto una colision')
+    sectionSeleccionarAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'none'
+    seleccionarMascotaEnemigo(enemigo)
+     
 }
 
 window.addEventListener('load', iniciarJuego)
