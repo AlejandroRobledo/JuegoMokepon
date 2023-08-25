@@ -28,7 +28,8 @@ const contenedorAtaques = document.getElementById('contenedorAtaques')
 /* let botonAgua = document.getElementById('boton-agua') */
 /* let botonTierra = document.getElementById('boton-tierra') */
 /* let sectionReiniciar = document.getElementById('reiniciar') */
-
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
 
 class Mokepon {
     constructor(nombre, foto, vida,fotoMapa) {
@@ -120,9 +121,6 @@ ratatoileEnemigo.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '🌱', id: 'boton-fuego' },
 )
-
-const sectionVerMapa = document.getElementById('ver-mapa')
-const mapa = document.getElementById('mapa')
 
 
 let mokepones = []
