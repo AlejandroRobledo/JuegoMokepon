@@ -30,17 +30,16 @@ const contenedorAtaques = document.getElementById('contenedorAtaques')
 /* let sectionReiniciar = document.getElementById('reiniciar') */
 
 
-
 class Mokepon {
-    constructor(nombre, foto, vida,fotoMapa, x = 10, y = 10) {
+    constructor(nombre, foto, vida,fotoMapa) {
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = x
-        this.y = y
         this.ancho = 40
         this.alto = 40
+        this.x = aleatorio(0, mapa.width - this.ancho)
+        this.y = aleatorio(0, mapa.height - this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -66,13 +65,14 @@ let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.
 let ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5 , './assets/ratigueya.webp')
 
 
-let pomeloEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5 , './assets/hipodoge.webp', 80, 120)
+let pomeloEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5 , './assets/hipodoge.webp')
 
-let achurasEnemigo = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5 , './assets/capipepo.webp', 150, 95)
+let achurasEnemigo = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5 , './assets/capipepo.webp')
 
-let ratatoileEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5 , './assets/ratigueya.webp', 200, 190)
+let ratatoileEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5 , './assets/ratigueya.webp')
 
 //Empujo informacion al arreglo "ataques"
+//Agregue los arreglos de los ataques enemigos
 pomelo.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
     { nombre: '💧', id: 'boton-agua' },
@@ -149,6 +149,17 @@ let vidasEnemigo = 3
 let lienzo = mapa.getContext("2d")
 let mapaBackgraund = new Image()
 mapaBackgraund.src ='./assets/mokemap.webp'
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 20
+const anchoMaximoDelMapa = 350
+
+if (anchoDelMapa > anchoMaximoDelMapa) {
+    anchoDelMapa = anchoMaximoDelMapa - 20
+}
+
+alturaQueBuscamos = anchoDelMapa * 600 / 800
+mapa.width = anchoDelMapa
+mapa.height = alturaQueBuscamos
 
 //En el metodo "push" lo que este adentro, lo va a "empujar" al arreglo y lo va a guardar
 /* mokepones.push(pomelo,achuras,ratatoile) */
