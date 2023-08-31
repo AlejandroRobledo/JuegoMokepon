@@ -467,6 +467,10 @@ function pintarCanvas() {
         mapa.height
     )
     mascotaJugadorObjeto.pintarMokepon()
+
+    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
+   
+
     pomeloEnemigo.pintarMokepon()
     achurasEnemigo.pintarMokepon()
     ratatoileEnemigo.pintarMokepon()
@@ -477,6 +481,22 @@ function pintarCanvas() {
         revisarColision(achurasEnemigo)
         revisarColision(ratatoileEnemigo)
     }
+}
+
+function enviarPosicion(x, y){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`, {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            x,
+            y
+        })
+    })
+    .catch(error => {
+        console.error("Error en la solicitud:", error);
+    });
 }
 
 
