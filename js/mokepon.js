@@ -66,62 +66,37 @@ let achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.
 let ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5, './assets/ratigueya.webp')
 
 
-let pomeloEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5, './assets/hipodoge.webp')
-
-let achurasEnemigo = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5, './assets/capipepo.webp')
-
-let ratatoileEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5, './assets/ratigueya.webp')
-
-//Empujo informacion al arreglo "ataques"
-//Agregue los arreglos de los ataques enemigos
-pomelo.ataques.push(
+const POMELO_ATAQUES = [
   { nombre: '💧', id: 'boton-agua' },
   { nombre: '💧', id: 'boton-agua' },
   { nombre: '💧', id: 'boton-agua' },
   { nombre: '🔥', id: 'boton-fuego' },
   { nombre: '🌱', id: 'boton-tierra' }
-)
+]
 
-pomeloEnemigo.ataques.push(
-  { nombre: '💧', id: 'boton-agua' },
-  { nombre: '💧', id: 'boton-agua' },
-  { nombre: '💧', id: 'boton-agua' },
-  { nombre: '🔥', id: 'boton-fuego' },
-  { nombre: '🌱', id: 'boton-tierra' }
-)
+pomelo.ataques.push(...POMELO_ATAQUES)
 
-achuras.ataques.push(
-  { nombre: '🌱', id: 'boton-tierra' },
-  { nombre: '🌱', id: 'boton-tierra' },
-  { nombre: '🌱', id: 'boton-tierra' },
-  { nombre: '💧', id: 'boton-agua' },
-  { nombre: '🔥', id: 'boton-fuego' },
-)
 
-achurasEnemigo.ataques.push(
-  { nombre: '🌱', id: 'boton-tierra' },
-  { nombre: '🌱', id: 'boton-tierra' },
-  { nombre: '🌱', id: 'boton-tierra' },
-  { nombre: '💧', id: 'boton-agua' },
-  { nombre: '🔥', id: 'boton-fuego' },
-)
+const ACHURAS_ATAQUES = [
+{ nombre: '🌱', id: 'boton-tierra' },
+{ nombre: '🌱', id: 'boton-tierra' },
+{ nombre: '🌱', id: 'boton-tierra' },
+{ nombre: '💧', id: 'boton-agua' },
+{ nombre: '🔥', id: 'boton-fuego' },]
 
-ratatoile.ataques.push(
-  { nombre: '🔥', id: 'boton-fuego' },
-  { nombre: '🔥', id: 'boton-fuego' },
-  { nombre: '🔥', id: 'boton-fuego' },
-  { nombre: '💧', id: 'boton-agua' },
-  { nombre: '🌱', id: 'boton-fuego' },
-)
+achuras.ataques.push(...ACHURAS_ATAQUES)
 
-ratatoileEnemigo.ataques.push(
-  { nombre: '🔥', id: 'boton-fuego' },
-  { nombre: '🔥', id: 'boton-fuego' },
-  { nombre: '🔥', id: 'boton-fuego' },
-  { nombre: '💧', id: 'boton-agua' },
-  { nombre: '🌱', id: 'boton-fuego' },
-)
 
+const RATATOILE_ATAQUES = [ 
+{ nombre: '🔥', id: 'boton-fuego' },
+{ nombre: '🔥', id: 'boton-fuego' },
+{ nombre: '🔥', id: 'boton-fuego' },
+{ nombre: '💧', id: 'boton-agua' },
+{ nombre: '🌱', id: 'boton-fuego' },]
+
+ratatoile.ataques.push(...RATATOILE_ATAQUES)
+
+mokepones.push(pomelo, achuras, ratatoile)
 
 let jugadorId = null
 let mokepones = []
@@ -494,9 +469,27 @@ function enviarPosicion(x, y) {
       y
     })
   })
-    .catch(error => {
-      console.error("Error en la solicitud:", error);
-    });
+    .then(function (res) {
+      if (res.ok) {
+        res.json()
+            .then( function ({ enemigos }) {
+              console.log(enemigos)
+              enemigos.forEach(function(enemigo) {
+              let mokeponEnemigo = null
+              const mokeponNombre = enemigo.mokepon.nombre || ""
+              if (mokeponNombre === "Pomelo") {
+                  let mokeponEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5, './assets/hipodoge.webp')
+              } else if (mokeponNombre === "Achuras") {
+                  let mokeponEnemigo = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5, './assets/capipepo.webp')
+              } else if (mokeponNombre === "Ratatoile"){
+                  let mokeponEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5, './assets/ratigueya.webp')
+              }
+
+              mokeponEnemigo.pintarMokepon()
+              })
+            })
+      }
+    })
 }
 
 
