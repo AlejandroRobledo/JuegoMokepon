@@ -63,9 +63,9 @@ const pomelo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.
 const achuras = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5, './assets/capipepo.webp')
 const ratatoile = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5, './assets/ratigueya.webp')
 
-/* const pomeloEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5, './assets/hipodoge.webp')
+const pomeloEnemigo = new Mokepon('Pomelo', './assets/mokepons_mokepon_hipodoge_attack.png', 5, './assets/hipodoge.webp')
 const achurasEnemigo = new Mokepon('Achuras', './assets/mokepons_mokepon_capipepo_attack.png', 5, './assets/capipepo.webp')
-const ratatoileEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5, './assets/ratigueya.webp') */
+const ratatoileEnemigo = new Mokepon('Ratatoile', './assets/mokepons_mokepon_ratigueya_attack.png', 5, './assets/ratigueya.webp')
 
 const POMELO_ATAQUES = [
   { nombre: '💧', id: 'boton-agua' },
@@ -431,15 +431,15 @@ function pintarCanvas() {
   mascotaJugadorObjeto.pintarMokepon()
 
   enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
-
-/*  pomeloEnemigo.pintarMokepon()
+ 
+  pomeloEnemigo.pintarMokepon()
   achurasEnemigo.pintarMokepon()
-  ratatoileEnemigo.pintarMokepon() */
+  ratatoileEnemigo.pintarMokepon()
   if (mascotaJugadorObjeto.velocidadX !== 0 ||
     mascotaJugadorObjeto.velocidadY !== 0) {
-    /*  revisarColision(pomeloEnemigo)
+    revisarColision(pomeloEnemigo)
     revisarColision(achurasEnemigo)
-    revisarColision(ratatoileEnemigo) */
+    revisarColision(ratatoileEnemigo)
   }
 }
 
